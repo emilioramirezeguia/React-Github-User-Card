@@ -3,19 +3,33 @@ import React from "react";
 class Form extends React.Component {
     constructor() {
         super();
+        this.state = {
+            formText: ""
+        }
+    }
+
+    handleChange = event => {
+        this.setState({
+            formText: event.target.value
+        })
+    }
+
+    handleSubmit = event => {
+        event.preventDefault();
+        this.props.searchUser(this.state.formText)
     }
 
     render() {
         return (
-            <form>
+            <form onSubmit={this.handleSubmit}>
                 <input
                     type="text"
                     name="username"
                     placeholder="Search by username"
-                    value={this.props.username}
-                    onChange={this.props.handleChange}
+                    value={this.state.formText}
+                    onChange={this.handleChange}
                 />
-                <button onClick={this.props.searchUser}>Search</button>
+                <button>Search</button>
             </form>
         )
     }
